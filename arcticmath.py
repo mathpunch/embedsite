@@ -1,42 +1,53 @@
-```Python
-print("<!DOCTYPE html>")
-print("<html lang=\"en\">")
-print("<head>")
-print("  <meta charset=\"UTF-8\" />")
-print("  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />")
-print("  <title>Arctic 1.0</title>")
-print("  <style>")
-print("    html, body {")
-print("      margin: 0;")
-print("      padding: 0;")
-print("      height: 100%;")
-print("      width: 100%;")
-print("      background-color: #111;")
-print("      overflow: hidden;")
-print("    }")
-print("    iframe {")
-print("      position: absolute;")
-print("      top: 50%;")
-print("      left: 50%;")
-print("      transform: translate(-50%, -50%);")
-print("      height: 100vh;")
-print("      width: auto;")
-print("      aspect-ratio: 9 / 16;")
-print("      max-width: 100vw;")
-print("      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);")
-print("      border: none;")
-print("    }")
-print("")
-print("    @media (max-width: 768px) {")
-print("      iframe {")
-print("        width: 100vw;")
-print("        height: auto;")
-print("      }")
-print("    }")
-print("  </style>")
-print("</head>")
-print("<body>")
-print("  <iframe src=\"https://historytourhome.speedinsure.hk\" allowfullscreen></iframe>")
-print("</body>")
-print("</html>")
-```
+import tempfile
+import webbrowser
+import os
+
+html_content = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arctic 1.0</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #111;
+      overflow: hidden;
+    }
+    iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100vh;
+      width: auto;
+      aspect-ratio: 9 / 16;
+      max-width: 100vw;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+      border: none;
+    }
+    @media (max-width: 768px) {
+      iframe {
+        width: 100vw;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <iframe src="https://historytourhome.speedinsure.hk" allowfullscreen></iframe>
+</body>
+</html>
+"""
+
+# Create a temporary file to hold the HTML
+with tempfile.NamedTemporaryFile('w', delete=False, suffix='.html') as f:
+    f.write(html_content)
+    temp_file_path = f.name
+
+# Open the HTML file in the default browser
+webbrowser.open(f'file://{os.path.abspath(temp_file_path)}')
